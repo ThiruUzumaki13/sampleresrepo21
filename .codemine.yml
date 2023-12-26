@@ -1,0 +1,39 @@
+# This is an example Quickstarter pipeline yaml configuration
+# Demonstrates multiple stages & parallel jobs execution
+
+version: 1.0
+
+stages:
+  stage1:
+    jobs:
+    - [test1]
+  stage2:
+    jobs:
+    - [test2, test3]
+    - [test4]
+
+jobs:
+  test1:
+    type: custom-container
+    parameters:
+      image: codemine-cr:5000/alpine:latest
+      scripts:
+      - echo 'Test1 job executed first'
+  test2:
+    type: custom-container
+    parameters:
+      image: codemine-cr:5000/alpine:latest
+      scripts:
+      - echo 'Test2 executed parallely with Test3 job after Test1 job completion'
+  test3:
+    type: custom-container
+    parameters:
+      image: codemine-cr:5000/alpine:latest
+      scripts:
+      - echo 'Test3 executed parallely with Test2 job after Test1 job completion'
+  test4:
+    type: custom-container
+    parameters:
+      image: codemine-cr:5000/alpine:latest
+      scripts:
+      - echo 'Test4 gets executed once Test2 & Test3 job completed'
