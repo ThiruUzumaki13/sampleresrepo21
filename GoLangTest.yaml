@@ -1,0 +1,26 @@
+version: 1.0
+stages:
+  stage1:
+    jobs:
+    - - Golanggithub
+    - - golang-build
+jobs:
+  Golanggithub:
+    description: source cloning job
+    type: source-checkout
+    timeout: 30
+    parameters:
+      service: github
+      integration: github_Thirumalai Nayagam.K
+      repo: sampleresrepo21
+      branch: main
+  golang-build:
+    description: build project using golang
+    type: golang
+    timeout: 30
+    parameters:
+      requiredArtifacts:
+      - Golanggithub
+      image: golang:latest
+      command: build
+
