@@ -1,1 +1,12 @@
-
+version: 1.0
+stages:
+  stage1:
+    jobs:
+      - - source-checkout-job
+jobs:
+ source-checkout-job:
+    type: source-checkout
+    parameters: 
+      depth: 10
+      branch: main
+       
